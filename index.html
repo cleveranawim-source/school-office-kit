@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 교무실 만들기 키트 — 시작 안내서</title>
+<meta name="description" content="선생님이 Claude Code·Codex와 함께 우리 학교 교직원 사이트를 직접 만드는 키트. 시작 세 단계, 시작 전에 꼭 알아 둘 것, 준비물.">
+<meta property="og:title" content="AI 교무실 만들기 키트">
+<meta property="og:description" content="우리 학교 교직원 사이트, AI와 함께 직접 만들기 — 시작 안내서와 3분 소개 영상">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cleveranawim-source.github.io/school-office-kit/">
+<meta property="og:image" content="https://cleveranawim-source.github.io/school-office-kit/og.png">
+<meta name="theme-color" content="#1F6F5C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F6F5C'/%3E%3Cpath d='M18 44V22l14-8 14 8v22' fill='none' stroke='%23F7F5EF' stroke-width='5' stroke-linejoin='round'/%3E%3Crect x='27' y='31' width='10' height='13' rx='2' fill='%23E8A33D'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#F7F5EF; --surface:#FFFFFF; --ink:#1F2A2E; --muted:#5F6B68; --line:#DCD8CC;
+  --brand:#1F6F5C; --brand-tint:#E3EFEA; --accent:#E8A33D; --accent-tint:#FBEFD9;
+  --bad:#C8553D; --warn:#B98516; --ok:#2E8B57; --term:#1E2624; --term-ink:#E8EEEC;
+  --radius:16px; --shadow:0 1px 2px rgba(31,42,46,.06),0 8px 24px rgba(31,42,46,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141917; --surface:#1C2321; --ink:#E8EEEC; --muted:#A3AFAB; --line:#2E3835;
+    --brand:#5FB89E; --brand-tint:#1F3530; --accent:#F0B65A; --accent-tint:#3A2F1C;
+    --bad:#E07A62; --warn:#E3B04B; --ok:#5DBB86; --term:#0E1312; --term-ink:#E8EEEC;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141917; --surface:#1C2321; --ink:#E8EEEC; --muted:#A3AFAB; --line:#2E3835;
+  --brand:#5FB89E; --brand-tint:#1F3530; --accent:#F0B65A; --accent-tint:#3A2F1C;
+  --bad:#E07A62; --warn:#E3B04B; --ok:#5DBB86; --term:#0E1312; --term-ink:#E8EEEC;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;line-height:1.65;font-size:17px;word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--brand)}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+section{padding:56px 0;border-top:1px solid var(--line)}
+h1,h2,h3{line-height:1.25;margin:0}
+h2{font-size:clamp(24px,4.2vw,32px);font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+.sub{color:var(--muted);margin:0 0 28px}
+.eyebrow{display:inline-block;font-size:14px;font-weight:700;color:var(--brand);background:var(--brand-tint);padding:6px 12px;border-radius:999px}
+/* 첫 화면 */
+.hero{padding-top:64px;padding-bottom:48px}
+.hero h1{font-size:clamp(36px,7.5vw,64px);font-weight:800;letter-spacing:-.02em;margin:18px 0 16px}
+.hero h1 em{font-style:normal;color:var(--brand)}
+.hero p.lead{font-size:clamp(17px,2.4vw,20px);color:var(--muted);max-width:640px;margin:0 0 28px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 20px;border-radius:12px;font-weight:700;text-decoration:none;border:1px solid transparent}
+.btn.primary{background:var(--brand);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0E1312}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0E1312}}
+.btn.ghost{border-color:var(--line);color:var(--ink);background:var(--surface)}
+.btn svg{width:20px;height:20px}
+/* 영상 */
+.video{margin-top:36px;border-radius:var(--radius);overflow:hidden;background:var(--term);box-shadow:var(--shadow);aspect-ratio:16/9;position:relative}
+.video video{width:100%;height:100%;display:block}
+.video .soon{position:absolute;inset:0;display:grid;place-items:center;color:var(--term-ink);font-weight:600;padding:16px;text-align:center}
+/* 카드 */
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.card h3{font-size:19px;font-weight:800;margin-bottom:6px}
+.card p{margin:0;color:var(--muted)}
+.pain .tag{font-size:13px;font-weight:700;color:var(--bad);display:block;margin-bottom:8px}
+.pain .fix{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);color:var(--ink);font-weight:600}
+.pain .fix span{color:var(--brand)}
+/* 세 단계 */
+.steps{counter-reset:s;display:grid;gap:16px}
+.step{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:start}
+.num{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:22px;background:var(--brand);color:#fff}
+:root[data-theme="dark"] .num{color:#0E1312}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .num{color:#0E1312}}
+.step h3{font-size:20px;font-weight:800;margin:10px 0 6px}
+.step p{margin:0 0 10px;color:var(--muted)}
+.note{background:var(--accent-tint);border-radius:12px;padding:12px 14px;font-size:15px;color:var(--ink)}
+.note b{color:var(--ink)}
+.term{position:relative;background:var(--term);color:var(--term-ink);border-radius:12px;padding:14px 56px 14px 16px;font-family:"SF Mono",Menlo,Consolas,monospace;font-size:14.5px;line-height:1.7;overflow-x:auto;white-space:pre}
+.term .p{color:#8FD3BC}
+.term .c{color:#8A9692}
+.copy{position:absolute;top:8px;right:8px;min-width:44px;min-height:36px;border:1px solid #3A4542;background:#26302D;color:#E8EEEC;border-radius:8px;font:600 13px/1 inherit;font-family:inherit;cursor:pointer}
+.copy.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.say{font-family:inherit;white-space:normal;font-size:17px;padding-right:64px}
+/* 흐름 */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px}
+.flow div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 12px;position:relative}
+.flow b{display:block;font-size:16px;margin-bottom:4px}
+.flow small{color:var(--muted);font-size:13.5px;line-height:1.5;display:block}
+.flow div:not(:last-child)::after{content:"";position:absolute;right:-9px;top:50%;width:8px;height:8px;border-top:2px solid var(--brand);border-right:2px solid var(--brand);transform:translateY(-50%) rotate(45deg);z-index:1}
+.flow div:last-child{border-color:var(--brand);background:var(--brand-tint)}
+@media (max-width:760px){.flow{grid-template-columns:1fr}.flow div:not(:last-child)::after{right:auto;left:22px;top:auto;bottom:-9px;transform:rotate(135deg)}}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:600;cursor:pointer;font-family:inherit;font-size:16px;color:var(--ink)}
+.chip.done{border-color:var(--ok);color:var(--ok)}
+/* 관문 */
+.gate .row{display:flex;gap:10px;align-items:baseline}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none;transform:translateY(1px)}
+.dot.bad{background:#E07A62}.dot.warn{background:#E3B04B}.dot.ok{background:#5DBB86}
+/* 기대치 */
+.expect .card h3{display:flex;gap:10px;align-items:center}
+.expect .ic{width:36px;height:36px;border-radius:10px;background:var(--brand-tint);display:grid;place-items:center;flex:none}
+.expect .ic svg{width:20px;height:20px;stroke:var(--brand);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* 체크리스트 */
+.check{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.check label{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;min-height:48px}
+.check input{width:22px;height:22px;accent-color:var(--brand);flex:none;margin-top:2px}
+.check small{display:block;color:var(--muted)}
+.check input:checked+span{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+.progress{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-weight:700}
+.bar{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--brand);transition:width .3s}
+/* 모듈 */
+.tier h3{font-size:18px;margin-bottom:10px;display:flex;gap:8px;align-items:center}
+.tier .badge{font-size:12px;font-weight:700;padding:3px 8px;border-radius:99px;background:var(--brand-tint);color:var(--brand)}
+.tier.t2 .badge{background:var(--accent-tint);color:#8A5A0B}
+:root[data-theme="dark"] .tier.t2 .badge{color:var(--accent)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tier.t2 .badge{color:var(--accent)}}
+.tier.t3 .badge{background:var(--line);color:var(--muted)}
+.tier ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.tier li{display:flex;justify-content:space-between;gap:10px;font-size:15.5px;padding:6px 0;border-bottom:1px solid var(--line)}
+.tier li:last-child{border-bottom:0}
+.lv{color:var(--muted);font-size:13.5px;white-space:nowrap}
+/* 문서 목록 */
+.docs{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.docs a{display:flex;gap:14px;align-items:baseline;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.docs a:hover{border-color:var(--brand)}
+.docs code{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--brand);flex:none;min-width:30px}
+.docs span small{display:block;color:var(--muted);font-size:14.5px}
+footer{padding-top:40px;padding-bottom:56px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+footer p{margin:4px 0}
+.theme{position:fixed;right:14px;bottom:14px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);box-shadow:var(--shadow);cursor:pointer;display:grid;place-items:center}
+.theme svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2}
+@media (max-width:520px){section{padding:44px 0}.card{padding:18px}.step{grid-template-columns:44px minmax(0,1fr);gap:12px}.num{width:44px;height:44px;font-size:19px}}
+</style>
+</head>
+<body>
+
+<header class="wrap hero">
+  <span class="eyebrow">Claude Code · Codex 쓰는 선생님을 위한</span>
+  <h1>AI 교무실<br><em>만들기 키트</em></h1>
+  <p class="lead">우리 학교 교직원 사이트를 AI와 함께 직접 만듭니다. 한 중학교가 한 달 동안 실제로 만들어 쓰며 알게 된 것 — 무엇을 만들지, 어떤 순서로, 무엇을 조심할지 — 를 그대로 담았습니다.</p>
+  <div class="btns">
+    <a class="btn primary" href="https://github.com/cleveranawim-source/school-office-kit/generate">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
+      템플릿으로 시작하기
+    </a>
+    <a class="btn ghost" href="#video">3분 영상 보기</a>
+    <a class="btn ghost" href="https://github.com/cleveranawim-source/school-office-kit">저장소 둘러보기</a>
+  </div>
+  <div class="video" id="video">
+    <video controls preload="metadata" playsinline poster="poster.jpg">
+      <source src="intro.mp4" type="video/mp4">
+    </video>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap">
+    <h2>이런 불편을 덜어 줍니다</h2>
+    <p class="sub">교무실의 일은 여러 도구에 흩어져 있습니다. 휴대폰 한 화면으로 모읍니다.</p>
+    <div class="grid g3">
+      <div class="card pain"><span class="tag">지금</span><h3>업무 요청은 메신저에</h3><p>보내기까지만 되고, 누가 읽었는지·끝냈는지 일일이 확인해야 합니다.</p><div class="fix"><span>바꾸면</span> 받는 사람은 [넵]·[완료] 하나만 누르고, 보낸 사람은 현황을 봅니다.</div></div>
+      <div class="card pain"><span class="tag">지금</span><h3>양식은 드라이브 어딘가에</h3><p>부서 폴더를 뒤지고, 링크만 알면 누구나 보는 자료도 섞여 있습니다.</p><div class="fix"><span>바꾸면</span> 교직원만 들어오는 자료실에서 부서별로 찾고 검색합니다.</div></div>
+      <div class="card pain"><span class="tag">지금</span><h3>시간표가 바뀌면 다시 엑셀</h3><p>파일을 다시 뽑아 나눠 주고, 휴대폰에서 확대해 봅니다.</p><div class="fix"><span>바꾸면</span> 한 번 올리면 교사·학급·교실별로, 지금 빈 교실까지 보입니다.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <div class="wrap">
+    <h2>시작은 세 단계</h2>
+    <p class="sub">코딩을 몰라도 됩니다. 다만 Claude Code나 Codex를 한 번은 써 보셨으면 좋습니다.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div>
+        <h3>템플릿으로 내 저장소 만들기</h3>
+        <p>GitHub 저장소에서 <b>Use this template → Create a new repository</b>를 누르고, 이름을 정한 뒤 <b>Private(비공개)</b>을 고릅니다.</p>
+        <div class="note"><b>꼭 비공개로.</b> 이 저장소에 우리 학교 정보와 구축 기록이 쌓입니다.</div>
+      </div></div>
+      <div class="step"><div class="num">2</div><div>
+        <h3>내 컴퓨터로 받아 폴더 열기</h3>
+        <p>터미널에서 아래처럼 받고, 그 폴더에서 Claude Code(<code>claude</code>) 또는 Codex(<code>codex</code>)를 실행합니다.</p>
+        <div class="term" id="cmd"><span class="c"># 「내아이디/저장소이름」을 1단계에서 만든 것으로 바꿉니다</span>
+<span class="p">$</span> git clone https://github.com/내아이디/저장소이름.git
+<span class="p">$</span> cd 저장소이름
+<span class="p">$</span> claude      <span class="c"># 또는 codex</span><button class="copy" data-copy="git clone https://github.com/내아이디/저장소이름.git&#10;cd 저장소이름&#10;claude">복사</button></div>
+      </div></div>
+      <div class="step"><div class="num">3</div><div>
+        <h3>첫마디</h3>
+        <p>이렇게만 말하면 AI가 우리 학교 사정부터 묻기 시작합니다(20~30분 인터뷰).</p>
+        <div class="term say">우리 학교 교무실 만들기 시작하자<button class="copy" data-copy="우리 학교 교무실 만들기 시작하자">복사</button></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>그다음은 AI가 이끕니다</h2>
+    <p class="sub">대화가 끊겨도 괜찮습니다. 우리 학교 정보(<code>school-profile.md</code>)와 구축 기록(<code>progress.md</code>)에 남아, 다음 대화가 이어받습니다.</p>
+    <div class="flow">
+      <div><b>인터뷰</b><small>학교 사정·쓰는 도구·가장 덜고 싶은 불편</small></div>
+      <div><b>단계 계획</b><small>먼저 있어야 할 것부터 순서를 짭니다</small></div>
+      <div><b>설계 메모</b><small>화면·권한을 정하고 함정을 미리 옮겨 둡니다</small></div>
+      <div><b>구현</b><small>작게 나눠 만들고 휴대폰에서 확인</small></div>
+      <div><b>관문 검사</b><small>넘어가기 전에 놓친 것을 자동으로 찾습니다</small></div>
+    </div>
+    <div class="grid g2">
+      <div class="card">
+        <h3>이렇게 말하면 됩니다</h3>
+        <p style="margin-bottom:14px">누르면 복사됩니다.</p>
+        <div class="chips">
+          <button class="chip" data-copy="다음 단계 하자">다음 단계 하자</button>
+          <button class="chip" data-copy="관문 검사해 줘">관문 검사해 줘</button>
+          <button class="chip" data-copy="지금 어디까지 했어?">지금 어디까지 했어?</button>
+          <button class="chip" data-copy="결석 접수도 만들고 싶어">○○도 만들고 싶어</button>
+          <button class="chip" data-copy="운영을 이어받았어. 지금 상태를 알려 줘">운영 이어받았어</button>
+        </div>
+      </div>
+      <div class="card gate">
+        <h3>관문 검사는 이런 것을 찾습니다</h3>
+        <div class="term" style="padding-right:16px;white-space:normal;font-size:14px;margin-top:12px">
+          <div class="row"><span class="dot bad"></span><span>권한(RLS)을 켜지 않은 표</span></div>
+          <div class="row"><span class="dot bad"></span><span>코드에 들어간 비밀 키·.env 파일</span></div>
+          <div class="row"><span class="dot warn"></span><span>로그인 안 해도 읽히는 정책·뷰</span></div>
+          <div class="row"><span class="dot warn"></span><span>서울 오전 9시 전에 하루 어긋나는 날짜</span></div>
+          <div class="row"><span class="dot warn"></span><span>아이폰에서 흔들리는 하단 탭</span></div>
+          <div class="row"><span class="dot ok"></span><span>통과한 것은 짧게 한 줄로</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="expect">
+  <div class="wrap">
+    <h2>시작 전에 꼭 알아 두세요</h2>
+    <p class="sub">기술보다 이쪽이 더 중요합니다. 미리 알면 중간에 지치지 않습니다.</p>
+    <div class="grid g2">
+      <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>시간 — 한 학기</h3><p>원본 학교는 거의 매일 붙어서 한 달 걸렸습니다. 수업하면서라면 핵심 기능(급식·공지·시간표·자료실·알림)까지 한 학기를 잡으세요.</p></div>
+      <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>책임 — 막히는 게 정상</h3><p>교직원 정보를 다루는 사이트입니다. 관리자 합의, 학교 공용 계정, 정보보안 확인이 없으면 키트가 1단계로 넘어가지 않습니다.</p></div>
+      <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg></span>비용 — 무료로 시작</h3><p>Supabase·Vercel 무료 요금제로 시작합니다. AI 도우미를 붙이면 월 몇만 원 — 결제 주체를 먼저 정하고 회사 콘솔에 지출 한도를 겁니다.</p></div>
+      <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>첫 목표 — 작게</h3><p>핵심 기능을 만들어 시범 사용자 3~5명에게 한 주 써 보게 하는 것. 업무 요청·교실 칠판·AI 도우미 같은 큰 기능은 그 뒤에.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ready">
+  <div class="wrap">
+    <h2>준비물 체크리스트</h2>
+    <p class="sub">체크한 것은 이 기기에 기억됩니다. 자세한 내용은 <a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/00-준비물.md">준비물 문서</a>에.</p>
+    <div class="progress"><span id="pct">0 / 9</span><div class="bar"><i id="bar"></i></div></div>
+    <ul class="check" id="checklist">
+      <li><label><input type="checkbox" data-k="admin"><span>교감 선생님(또는 학교 관리자)과 합의했다<small>무엇을, 누가 운영, 비용은 어디서</small></span></label></li>
+      <li><label><input type="checkbox" data-k="security"><span>정보보안 담당께 확인했다<small>교직원·학생 정보를 해외 클라우드에 두는 것, 처리 범위</small></span></label></li>
+      <li><label><input type="checkbox" data-k="account"><span>학교 공용 메일을 정했다<small>서비스 계정을 개인 명의로 만들면 전근 때 사이트가 같이 떠납니다</small></span></label></li>
+      <li><label><input type="checkbox" data-k="github"><span>GitHub 계정</span></label></li>
+      <li><label><input type="checkbox" data-k="supabase"><span>Supabase 계정<small>데이터베이스·로그인·파일. 서울 지역으로</small></span></label></li>
+      <li><label><input type="checkbox" data-k="vercel"><span>Vercel 계정<small>사이트 주소. GitHub와 연결하면 자동 배포</small></span></label></li>
+      <li><label><input type="checkbox" data-k="node"><span>내 컴퓨터에 Node.js와 git</span></label></li>
+      <li><label><input type="checkbox" data-k="agent"><span>Claude Code 또는 Codex</span></label></li>
+      <li><label><input type="checkbox" data-k="pilot"><span>시범 사용자 3~5명<small>첫 공개 전에 한 주 써 볼 선생님</small></span></label></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>무엇을 만들 수 있나</h2>
+    <p class="sub">원본 학교의 모듈 23개입니다. 핵심부터 만들고, 나머지는 학교 사정에 맞게 고릅니다. 학교마다 다른 것(시간표 파일 형식, 학부모 창구 등)은 인터뷰에서 정합니다.</p>
+    <div class="grid g3">
+      <div class="card tier t1"><h3>핵심 <span class="badge">먼저</span></h3><ul>
+        <li>로그인·계정 <span class="lv">중</span></li><li>관리 화면 <span class="lv">중</span></li><li>급식 <span class="lv">하</span></li><li>공지 <span class="lv">하~중</span></li><li>홈 <span class="lv">중</span></li><li>시간표 <span class="lv">중</span></li><li>일정 <span class="lv">중</span></li><li>담임 배정 <span class="lv">하</span></li><li>자료실 <span class="lv">중</span></li><li>알림(웹푸시) <span class="lv">중</span></li>
+      </ul></div>
+      <div class="card tier t2"><h3>추천 <span class="badge">대부분 쓸모</span></h3><ul>
+        <li>업무 요청 「넵」 <span class="lv">상</span></li><li>진도표 <span class="lv">하~중</span></li><li>조직표 <span class="lv">중</span></li><li>주간소식 <span class="lv">중</span></li><li>내 서명 <span class="lv">중</span></li><li>서명부·파일 서명 <span class="lv">상</span></li><li>AI 도우미 <span class="lv">상</span></li><li>신청 <span class="lv">하~중</span></li>
+      </ul></div>
+      <div class="card tier t3"><h3>선택 <span class="badge">학교 사정 따라</span></h3><ul>
+        <li>결석 접수 <span class="lv">중</span></li><li>체험학습 신청 <span class="lv">하~중</span></li><li>보건실 알림 <span class="lv">하~중</span></li><li>교실 칠판 알림 <span class="lv">상</span></li><li>세특 도우미 <span class="lv">상</span></li><li>수업교체 <span class="lv">하~상</span></li><li>교과협의록 <span class="lv">하~중</span></li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>키트 안에 든 것</h2>
+    <p class="sub">에이전트가 읽는 문서이지만, 사람이 읽어도 되게 썼습니다.</p>
+    <ul class="docs">
+      <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/02-모듈카탈로그.md"><code>02</code><span>모듈 카탈로그<small>모듈마다 덜어 주는 불편, 먼저 있어야 할 것, 난이도, 학교마다 다른 것</small></span></a></li>
+      <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/03-구축순서.md"><code>03</code><span>구축 순서와 관문<small>단계마다 넘어가기 전에 확인할 것</small></span></a></li>
+      <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/05-보안기준선.md"><code>05</code><span>보안 기준선<small>교직원 정보를 다루는 사이트가 처음부터 지킬 것</small></span></a></li>
+      <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/06-함정노트.md"><code>06</code><span>함정 노트 85가지<small>원본 학교가 커밋 515개 동안 실제로 부딪친 문제 — 증상·원인·규칙</small></span></a></li>
+      <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/07-AI도우미.md"><code>07</code><span>AI 도우미<small>구조, 확인 카드, 비용, 점검 세트</small></span></a></li>
+      <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/08-인수인계.md"><code>08</code><span>인수인계<small>내가 전근 가도 사이트가 남도록</small></span></a></li>
+      <li><a href="https://github.com/cleveranawim-source/school-office-kit/tree/main/.agents/skills/school-office"><code>skill</code><span>진행 스킬 school-office<small>단계 계획·설계 메모·관문 검사 스크립트. Claude Code와 Codex 모두에서</small></span></a></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>질문과 나눔</h2>
+    <p class="sub">막히면 혼자 끙끙대지 말고 물어 주세요. 우리 학교에서 새로 알게 된 함정을 나눠 주시면, 다음 학교가 덜 헤맵니다.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://github.com/cleveranawim-source/school-office-kit/discussions">Discussions에서 묻기·나누기</a>
+      <a class="btn ghost" href="https://github.com/cleveranawim-source/school-office-kit">GitHub 저장소</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap">
+  <p>AI 교무실 만들기 키트 · MIT 라이선스 · 무료</p>
+  <p>한 중학교가 2026년 9월부터 운영 중인 교직원 사이트에서 뽑았습니다. 원본 학교의 교직원·학생 정보, 비밀 값, 서식 원본은 들어 있지 않습니다.</p>
+</footer>
+
+<button class="theme" id="theme" aria-label="밝은/어두운 화면 바꾸기"><svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+
+<script>
+(function(){
+  var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+  // 복사
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.getAttribute('data-copy');
+      var done=function(){var old=b.textContent;b.classList.add('done');if(b.classList.contains('copy'))b.textContent='복사됨';setTimeout(function(){b.classList.remove('done');if(b.classList.contains('copy'))b.textContent=old},1400)};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){fallback(t);done()})}else{fallback(t);done()}
+    });
+  });
+  function fallback(t){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove()}
+  // 체크리스트
+  var boxes=[].slice.call(document.querySelectorAll('#checklist input'));
+  var saved={};try{saved=JSON.parse(store.get('sok-check')||'{}')}catch(e){}
+  function render(){var n=boxes.filter(function(b){return b.checked}).length;document.getElementById('pct').textContent=n+' / '+boxes.length;document.getElementById('bar').style.width=(n/boxes.length*100)+'%'}
+  boxes.forEach(function(b){b.checked=!!saved[b.dataset.k];b.addEventListener('change',function(){saved[b.dataset.k]=b.checked;store.set('sok-check',JSON.stringify(saved));render()})});
+  render();
+  // 화면 밝기
+  var root=document.documentElement,t=store.get('sok-theme');if(t)root.setAttribute('data-theme',t);
+  document.getElementById('theme').addEventListener('click',function(){
+    var dark=root.getAttribute('data-theme')==='dark'||(!root.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches);
+    var next=dark?'light':'dark';root.setAttribute('data-theme',next);store.set('sok-theme',next);
+  });
+  // 영상이 아직 없으면 안내
+  var v=document.querySelector('#video video');
+  v.addEventListener('error',showSoon,true);v.querySelector('source').addEventListener('error',showSoon);
+  function showSoon(){if(document.querySelector('.video .soon'))return;var d=document.createElement('div');d.className='soon';d.textContent='소개 영상을 준비하고 있습니다.';v.parentNode.appendChild(d);v.style.visibility='hidden'}
+})();
+</script>
+</body>
+</html>
