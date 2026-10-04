@@ -1,6 +1,6 @@
 # AI 교무실 만들기 키트
 
-**[시작 안내서](https://cleveranawim-source.github.io/school-office-kit/)** · **[3분 소개 영상](https://cleveranawim-source.github.io/school-office-kit/intro.mp4)** · 질문은 [Discussions](https://github.com/cleveranawim-source/school-office-kit/discussions)
+**[시작 안내서](https://cleveranawim-source.github.io/school-office-kit/)** · **[소개 영상](https://cleveranawim-source.github.io/school-office-kit/intro.mp4)** · 질문은 [Discussions](https://github.com/cleveranawim-source/school-office-kit/discussions)
 
 선생님이 **Claude Code** 또는 **Codex**와 함께, 우리 학교 교직원용 사이트(「AI 교무실」)를 처음부터 만들 수 있게 돕는 안내 묶음입니다.
 
