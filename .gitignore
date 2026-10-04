@@ -1,0 +1,21 @@
+# 비밀 값 — 견본(.env.example)만 올린다
+.env*
+!.env.example
+
+# 초기 비밀번호 CSV 등 스크립트 출력
+out/
+
+# 실명이 든 원본 자료(명단·시간표·업무분장)는 여기에 두고 올리지 않는다
+private/
+
+# 빌드·의존성
+node_modules/
+.next/
+.vercel/
+coverage/
+playwright-report/
+test-results/
+
+# 기기 파일
+.DS_Store
+Thumbs.db
