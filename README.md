@@ -38,6 +38,16 @@
 node .agents/skills/school-office/scripts/gate.mjs
 ``` 인터뷰가 끝나면 `school-profile.md`(우리 학교 정보)와 `progress.md`(구축 기록)가 생기고, 다음 대화부터는 그 기록을 이어서 진행합니다.
 
+## 키트 업데이트 받기
+
+키트는 계속 고쳐집니다(새 함정, 더 나은 관문 검사). 템플릿으로 만든 저장소는 저절로 따라오지 않으니, 가끔 에이전트에게 **「키트 업데이트해 줘」**라고 말하세요. 직접 하려면:
+
+```bash
+node kit/scripts/update-kit.mjs
+```
+
+미리 보기만 하고 아무것도 바꾸지 않습니다. 확인한 뒤 `--apply`를 붙이면 적용됩니다. 선생님이 고친 파일은 덮어쓰지 않습니다. 앱 코드와 `school-profile.md`·`progress.md`도 건드리지 않습니다. 자세한 것은 `kit/docs/09-키트업데이트.md`에 있습니다.
+
 ## 준비물
 
 `kit/docs/00-준비물.md`에 자세히 있습니다. 요약하면:
