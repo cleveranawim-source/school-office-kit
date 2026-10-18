@@ -50,6 +50,8 @@ function addNeeds(id, because) {
   }
 }
 for (const id of chosen) addNeeds(id, id);
+// 남긴 기본 모듈이 기대는 기본 모듈도 되살린다(예: 알림함은 알림이 있어야 한다).
+for (const s of catalog.stages) for (const id of s.modules) if (!skip.has(id)) addNeeds(id, id);
 for (const s of skip) notes.push(`뺌: ${name(s)}`);
 
 // 2) 기본 단계(1~4). 뺀 것은 빼고, 비면 단계를 없앤다.
@@ -61,6 +63,15 @@ for (const s of catalog.stages) {
   mods.forEach((m) => placed.add(m));
 }
 const coreCount = stages.length;
+
+// 카탈로그 검사: 기본 단계 모듈의 requires·after 는 같은 단계(앞에 적힌 것)나 앞 단계만 가리켜야 한다.
+{
+  const pos = new Map();
+  catalog.stages.forEach((s, i) => s.modules.forEach((m, j) => pos.set(m, i * 100 + j)));
+  for (const [id, p] of pos)
+    for (const r of [...catalog.byId.get(id).requires, ...(catalog.byId.get(id).after || [])])
+      if (!pos.has(r) || pos.get(r) > p) notes.push(`⚠ 카탈로그 확인: 기본 단계의 「${name(id)}」가 뒤에 오는 「${name(r)}」를 먼저 필요로 합니다(modules.json).`);
+}
 
 // 3) 나머지: 고른 순서를 지키되 requires·after 를 먼저 둔다.
 const pending = [...new Set([...chosen, ...needed])].filter((id) => !placed.has(id));
@@ -106,11 +117,27 @@ for (const s of all) {
   s.memo = `node .agents/skills/school-office/scripts/memo.mjs ${s.modules.join(" ")} --stage ${s.n} --title "${s.name}"`;
 }
 
-const ai = all.some((s) => s.modules.includes("ai"));
+// 함께 손볼 곳: 뒤 단계 모듈이 앞 단계에서 이미 만든 모듈(홈 카드·현황판 칸·AI 도구 등)을 고쳐야 한다.
+{
+  const built = new Set();
+  for (const s of all) {
+    for (const id of s.modules) {
+      const t = (catalog.byId.get(id).touches || []).filter((x) => built.has(x));
+      if (t.length) notes.push(`함께 손볼 곳 — ${s.n}단계 「${name(id)}」: ${t.map(name).join(", ")}(이미 만든 단계)에 이 모듈의 줄·카드·도구를 더합니다.`);
+    }
+    s.modules.forEach((id) => built.add(id));
+  }
+}
+
+const has = (id) => all.some((s) => s.modules.includes(id));
+const ai = has("ai");
 if (ai) notes.push("AI 도우미: 비용 주체·월 한도를 0단계에서 정했는지 확인하세요(kit/docs/00-준비물.md).");
-if (all.some((s) => s.modules.includes("board"))) notes.push("교실 칠판: 시작 전에 학교 정보 담당과 교실 PC·보안점검 기준을 상의하세요.");
-if (all.some((s) => s.modules.some((m) => ["absence", "trip", "record"].includes(m))))
-  notes.push("학생 정보를 다루는 모듈이 있습니다: kit/docs/05-보안기준선.md G절(개인정보 줄이기)을 설계 메모에 옮기세요.");
+if (has("board")) notes.push("교실 칠판: 시작 전에 학교 정보 담당과 교실 PC·보안점검 기준을 상의하세요.");
+if (has("today") && !has("swap")) notes.push("현황판: 수업교체가 계획에 없어 「바뀐 수업」 칸 없이 공지·특별 일정·내 마감으로 시작합니다.");
+if (has("studentphotos")) notes.push("학생 사진 명렬표: 기본은 빼 두는 모듈입니다. 교육청·학교 지침을 먼저 확인하고, 확인 전에는 이 단계를 시작하지 않습니다.");
+if (has("lostfound")) notes.push("분실물 함: 로그인 없는 학생용 보기는 기본 꺼짐입니다. 켜기 전에 교육청·학교 지침을 확인합니다.");
+if (all.some((s) => s.modules.some((m) => ["absence", "trip", "record", "studentphotos", "lostfound"].includes(m))))
+  notes.push("학생 정보를 다루는 모듈이 있습니다: kit/docs/05-보안기준선.md G절(개인정보·사생활)을 설계 메모에 옮기세요.");
 
 if (opts.json) {
   console.log(JSON.stringify({ date: today(), chosen, stages: all, firstRelease: coreCount, notes }, null, 2));
@@ -118,7 +145,7 @@ if (opts.json) {
 }
 
 const out = [];
-out.push(`## 단계 계획 (plan.mjs, ${today()})`, "");
+out.push(`### 단계 계획표 (plan.mjs, ${today()})`, "");
 out.push(`고른 모듈(급한 순): ${chosen.length ? chosen.map(name).join(" → ") : "(아직 없음 — 핵심만)"}`, "");
 out.push("| 단계 | 내용 | 모듈 | 난이도 | 상태 | 관문 통과일 |", "|---|---|---|---|---|---|");
 out.push("| 0 | 준비 | 계정·합의·비용 한도 | — | | |");

@@ -4,14 +4,18 @@
 //
 //   1) kit/VERSION 올리기   2) kit/CHANGELOG.md 에 바뀐 점 적기
 //   3) node kit/scripts/sync-skills.mjs   4) node kit/scripts/make-manifest.mjs   5) 커밋·푸시
+//   (4 는 먼저 check-kit.mjs 로 함정 번호·모듈 참조를 확인하고, 문제가 있으면 목록을 만들지 않는다)
 //
 //   node kit/scripts/make-manifest.mjs --check   # 목록이 지금 파일과 맞는지만(다르면 종료 코드 1)
+import { spawnSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildManifest } from "./kit-files.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
+const refs = spawnSync(process.execPath, [join(root, "kit", "scripts", "check-kit.mjs")], { stdio: "inherit" });
+if (refs.status !== 0) process.exit(1);
 const version = readFileSync(join(root, "kit", "VERSION"), "utf8").trim();
 const next = buildManifest(root, version);
 const file = join(root, "kit", "MANIFEST.json");
