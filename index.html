@@ -146,7 +146,7 @@ footer p{margin:4px 0}
 <div class="top"><header class="wrap hero">
   <span class="eyebrow">Claude Code · Codex 쓰는 선생님을 위한</span>
   <h1>AI 교무실<br><em>만들기 키트</em></h1>
-  <p class="lead">우리 학교 교직원 사이트를 AI와 함께 직접 만듭니다. 한 중학교가 한 달 동안 실제로 만들어 쓰며 알게 된 것 — 무엇을 만들지, 어떤 순서로, 무엇을 조심할지 — 를 그대로 담았습니다.</p>
+  <p class="lead">우리 학교 교직원 사이트를 AI와 함께 직접 만듭니다. 한 중학교가 한 달 반 동안 실제로 만들어 쓰며 알게 된 것 — 무엇을 만들지, 어떤 순서로, 무엇을 조심할지 — 를 그대로 담았습니다.</p>
   <div class="btns">
     <a class="btn primary" href="https://github.com/cleveranawim-source/school-office-kit/generate">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.8.1-.7.1-.7 1.2.1 1.9 1.3 1.9 1.3 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg>
@@ -168,7 +168,7 @@ footer p{margin:4px 0}
     <h2>이런 불편을 <span class="mark">덜어 줍니다</span></h2>
     <p class="sub">교무실의 일은 여러 도구에 흩어져 있습니다. 휴대폰 한 화면으로 모읍니다.</p>
     <div class="grid g3">
-      <div class="card pain"><span class="tag">지금</span><h3>업무 요청은 메신저에</h3><p>보내기까지만 되고, 누가 읽었는지·끝냈는지 일일이 확인해야 합니다.</p><div class="fix"><span>바꾸면</span> 받는 사람은 [넵]·[완료] 하나만 누르고, 보낸 사람은 현황을 봅니다.</div></div>
+      <div class="card pain"><span class="tag">지금</span><h3>업무 요청은 단체 대화방에</h3><p>수업 중에도 알림이 울리고, 누가 읽었는지·끝냈는지 일일이 확인해야 합니다.</p><div class="fix"><span>바꾸면</span> 학교 일을 아는 업무 메신저로. 받는 사람은 [넵]·[완료] 하나만 누르고, 수업 중에는 쉬는 시간에 배달됩니다.</div></div>
       <div class="card pain"><span class="tag">지금</span><h3>양식은 드라이브 어딘가에</h3><p>부서 폴더를 뒤지고, 링크만 알면 누구나 보는 자료도 섞여 있습니다.</p><div class="fix"><span>바꾸면</span> 교직원만 들어오는 자료실에서 부서별로 찾고 검색합니다.</div></div>
       <div class="card pain"><span class="tag">지금</span><h3>시간표가 바뀌면 다시 엑셀</h3><p>파일을 다시 뽑아 나눠 주고, 휴대폰에서 확대해 봅니다.</p><div class="fix"><span>바꾸면</span> 한 번 올리면 교사·학급·교실별로, 지금 빈 교실까지 보입니다.</div></div>
     </div>
@@ -231,7 +231,10 @@ footer p{margin:4px 0}
         <div class="term" style="padding-right:16px;white-space:normal;font-size:14px;margin-top:12px">
           <div class="row"><span class="dot bad"></span><span>권한(RLS)을 켜지 않은 표</span></div>
           <div class="row"><span class="dot bad"></span><span>코드에 들어간 비밀 키·.env 파일</span></div>
+          <div class="row"><span class="dot bad"></span><span>뷰를 통해 원래 표를 고칠 수 있는 권한</span></div>
           <div class="row"><span class="dot warn"></span><span>로그인 안 해도 읽히는 정책·뷰</span></div>
+          <div class="row"><span class="dot warn"></span><span>「교직원만」 제한 정책이 빠진 표</span></div>
+          <div class="row"><span class="dot warn"></span><span>로그인 확인 없이 열리는 서버 코드</span></div>
           <div class="row"><span class="dot warn"></span><span>서울 오전 9시 전에 하루 어긋나는 날짜</span></div>
           <div class="row"><span class="dot warn"></span><span>아이폰에서 흔들리는 하단 탭</span></div>
           <div class="row"><span class="dot ok"></span><span>통과한 것은 짧게 한 줄로</span></div>
@@ -246,7 +249,7 @@ footer p{margin:4px 0}
     <h2>시작 전에 <span class="mark">꼭</span> 알아 두세요</h2>
     <p class="sub">기술보다 이쪽이 더 중요합니다. 미리 알면 중간에 지치지 않습니다.</p>
     <div class="grid g2">
-      <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>시간 — 한 학기</h3><p>원본 학교는 거의 매일 붙어서 한 달 걸렸습니다. 수업하면서라면 핵심 기능(급식·공지·시간표·자료실·알림)까지 한 학기를 잡으세요.</p></div>
+      <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>시간 — 한 학기</h3><p>원본 학교는 거의 매일 붙어서 핵심 기능까지 한 달, 지금 모습까지 한 달 반 걸렸습니다. 수업하면서라면 핵심 기능(급식·공지·시간표·자료실·알림)까지 한 학기를 잡으세요.</p></div>
       <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>책임 — 막히는 게 정상</h3><p>교직원 정보를 다루는 사이트입니다. 관리자 합의, 학교 공용 계정, 정보보안 확인이 없으면 키트가 1단계로 넘어가지 않습니다.</p></div>
       <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h3"/></svg></span>비용 — 무료로 시작</h3><p>Supabase·Vercel 무료 요금제로 시작합니다. AI 도우미를 붙이면 월 몇만 원 — 결제 주체를 먼저 정하고 회사 콘솔에 지출 한도를 겁니다.</p></div>
       <div class="card"><h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>첫 목표 — 작게</h3><p>핵심 기능을 만들어 시범 사용자 3~5명에게 한 주 써 보게 하는 것. 업무 요청·교실 칠판·AI 도우미 같은 큰 기능은 그 뒤에.</p></div>
@@ -276,16 +279,16 @@ footer p{margin:4px 0}
 <section>
   <div class="wrap">
     <h2>무엇을 만들 수 있나</h2>
-    <p class="sub">원본 학교의 모듈 23개입니다. 핵심부터 만들고, 나머지는 학교 사정에 맞게 고릅니다. 학교마다 다른 것(시간표 파일 형식, 학부모 창구 등)은 인터뷰에서 정합니다.</p>
+    <p class="sub">원본 학교의 모듈 33개입니다. 핵심부터 만들고, 나머지는 학교 사정에 맞게 고릅니다. 학교마다 다른 것(시간표 파일 형식, 학부모 창구 등)은 인터뷰에서 정합니다.</p>
     <div class="grid g3">
       <div class="card tier t1"><h3>핵심 <span class="badge">먼저</span></h3><ul>
-        <li>로그인·계정 <span class="lv">중</span></li><li>관리 화면 <span class="lv">중</span></li><li>급식 <span class="lv">하</span></li><li>공지 <span class="lv">하~중</span></li><li>홈 <span class="lv">중</span></li><li>시간표 <span class="lv">중</span></li><li>일정 <span class="lv">중</span></li><li>담임 배정 <span class="lv">하</span></li><li>자료실 <span class="lv">중</span></li><li>알림(웹푸시) <span class="lv">중</span></li>
+        <li>앱 틀·공통 부품 <span class="lv">중</span></li><li>로그인·계정 <span class="lv">중</span></li><li>관리 화면 <span class="lv">중</span></li><li>급식 <span class="lv">하</span></li><li>공지 <span class="lv">하~중</span></li><li>홈 <span class="lv">중</span></li><li>시간표 <span class="lv">중</span></li><li>일정 <span class="lv">중</span></li><li>담임 배정 <span class="lv">하</span></li><li>자료실 <span class="lv">중</span></li><li>알림(웹푸시) <span class="lv">중</span></li><li>알림함 <span class="lv">하~중</span></li>
       </ul></div>
       <div class="card tier t2"><h3>추천 <span class="badge">대부분 쓸모</span></h3><ul>
-        <li>업무 요청 「넵」 <span class="lv">상</span></li><li>진도표 <span class="lv">하~중</span></li><li>조직표 <span class="lv">중</span></li><li>주간소식 <span class="lv">중</span></li><li>내 서명 <span class="lv">중</span></li><li>서명부·파일 서명 <span class="lv">상</span></li><li>AI 도우미 <span class="lv">상</span></li><li>신청 <span class="lv">하~중</span></li>
+        <li>그날 시간표 <span class="lv">중</span></li><li>현황판 <span class="lv">중</span></li><li>진도표 <span class="lv">하~중</span></li><li>조직표·받는 사람 고르기 <span class="lv">중</span></li><li>넵(업무 메신저) <span class="lv">상</span></li><li>주간소식 <span class="lv">중</span></li><li>내 서명 <span class="lv">중</span></li><li>서명부·파일 서명 <span class="lv">상</span></li><li>AI 도우미 <span class="lv">상</span></li><li>신청 <span class="lv">하~중</span></li>
       </ul></div>
       <div class="card tier t3"><h3>선택 <span class="badge">학교 사정 따라</span></h3><ul>
-        <li>결석 접수 <span class="lv">중</span></li><li>체험학습 신청 <span class="lv">하~중</span></li><li>보건실 알림 <span class="lv">하~중</span></li><li>교실 칠판 알림 <span class="lv">상</span></li><li>세특 도우미 <span class="lv">상</span></li><li>수업교체 <span class="lv">하~상</span></li><li>교과협의록 <span class="lv">하~중</span></li>
+        <li>결석 접수 <span class="lv">중</span></li><li>체험학습 신청 <span class="lv">하~중</span></li><li>보건실 알림 <span class="lv">하~중</span></li><li>교실 칠판 알림 <span class="lv">상</span></li><li>세특 도우미 <span class="lv">상</span></li><li>수업교체 <span class="lv">중~상</span></li><li>교과협의록 <span class="lv">하~중</span></li><li>분실물 함 <span class="lv">중</span></li><li>학생 사진 명렬표 (기본 꺼짐) <span class="lv">중</span></li><li>학교 행사 화면 <span class="lv">하~중</span></li><li>날씨 따라 바뀌는 안내 <span class="lv">중</span></li>
       </ul></div>
     </div>
   </div>
@@ -299,7 +302,7 @@ footer p{margin:4px 0}
       <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/02-모듈카탈로그.md"><code>02</code><span>모듈 카탈로그<small>모듈마다 덜어 주는 불편, 먼저 있어야 할 것, 난이도, 학교마다 다른 것</small></span></a></li>
       <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/03-구축순서.md"><code>03</code><span>구축 순서와 관문<small>단계마다 넘어가기 전에 확인할 것</small></span></a></li>
       <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/05-보안기준선.md"><code>05</code><span>보안 기준선<small>교직원 정보를 다루는 사이트가 처음부터 지킬 것</small></span></a></li>
-      <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/06-함정노트.md"><code>06</code><span>함정 노트 85가지<small>원본 학교가 커밋 515개 동안 실제로 부딪친 문제 — 증상·원인·규칙</small></span></a></li>
+      <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/06-함정노트.md"><code>06</code><span>함정 노트 114가지<small>원본 학교가 한 달 반, 커밋 약 1,000개 동안 실제로 부딪친 문제 — 증상·원인·규칙</small></span></a></li>
       <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/07-AI도우미.md"><code>07</code><span>AI 도우미<small>구조, 확인 카드, 비용, 점검 세트</small></span></a></li>
       <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/08-인수인계.md"><code>08</code><span>인수인계<small>내가 전근 가도 사이트가 남도록</small></span></a></li>
       <li><a href="https://github.com/cleveranawim-source/school-office-kit/blob/main/kit/docs/09-키트업데이트.md"><code>09</code><span>키트 업데이트<small>새 판 받기 — 우리가 고친 파일은 지키면서</small></span></a></li>
