@@ -36,7 +36,9 @@
 
 ```bash
 node .agents/skills/school-office/scripts/gate.mjs
-``` 인터뷰가 끝나면 `school-profile.md`(우리 학교 정보)와 `progress.md`(구축 기록)가 생기고, 다음 대화부터는 그 기록을 이어서 진행합니다.
+```
+
+인터뷰가 끝나면 `school-profile.md`(우리 학교 정보)와 `progress.md`(구축 기록)가 생기고, 다음 대화부터는 그 기록을 이어서 진행합니다.
 
 ## 키트 업데이트 받기
 
